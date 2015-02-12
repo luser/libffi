@@ -40,7 +40,7 @@
 # define C(X)     X
 #endif
 
-#ifdef X86_DARWIN
+#if defined DARWIN && defined __i386__
 # define L(X)     C1(L, X)
 #else
 # define L(X)     C1(.L, X)
@@ -257,7 +257,7 @@ ENDF(ffi_call_i386)
 	jmp	*%edx
 
 #ifdef __PIC__
-# if defined X86_DARWIN || defined HAVE_HIDDEN_VISIBILITY_ATTRIBUTE
+# if (defined DARWIN && defined __i386__) || defined HAVE_HIDDEN_VISIBILITY_ATTRIBUTE
 #  undef FFI_CLOSURE_MASK_AND_JUMP
 #  define FFI_CLOSURE_MASK_AND_JUMP(N, UW)				\
 	andl	$X86_RET_TYPE_MASK, %eax;				\
@@ -788,7 +788,7 @@ ENDF(C(ffi_closure_raw_THISCALL))
 
 #endif /* !FFI_NO_RAW_API */
 
-#ifdef X86_DARWIN
+#if defined DARWIN && defined __i386__
 # define COMDAT(X)							\
         .section __TEXT,__textcoal_nt,coalesced,pure_instructions;	\
         .weak_definition X;						\
@@ -808,7 +808,7 @@ C(__x86.get_pc_thunk.bx):
 	movl	(%esp), %ebx
 	ret
 ENDF(C(__x86.get_pc_thunk.bx))
-# if defined X86_DARWIN || defined HAVE_HIDDEN_VISIBILITY_ATTRIBUTE
+# if (defined DARWIN && defined __i386__) || defined HAVE_HIDDEN_VISIBILITY_ATTRIBUTE
 	COMDAT(C(__x86.get_pc_thunk.dx))
 C(__x86.get_pc_thunk.dx):
 	movl	(%esp), %edx

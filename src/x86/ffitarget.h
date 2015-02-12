@@ -84,7 +84,7 @@ typedef enum ffi_abi {
   FFI_LAST_ABI,
   FFI_DEFAULT_ABI = FFI_WIN64
 
-#elif defined(X86_64) || (defined (__x86_64__) && defined (X86_DARWIN))
+#elif defined(X86_64) || (defined (__x86_64__) && defined (DARWIN))
   FFI_FIRST_ABI = 1,
   FFI_UNIX64,
   FFI_LAST_ABI,
@@ -127,7 +127,7 @@ typedef enum ffi_abi {
 #define FFI_TYPE_MS_STRUCT       (FFI_TYPE_LAST + 4)
 
 #if defined (X86_64) || defined(X86_WIN64) \
-    || (defined (__x86_64__) && defined (X86_DARWIN))
+    || (defined (__x86_64__) && defined (DARWIN))
 # define FFI_TRAMPOLINE_SIZE 24
 # define FFI_NATIVE_RAW_API 0
 #else

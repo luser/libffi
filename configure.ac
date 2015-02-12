@@ -143,7 +143,7 @@ case "$TARGET" in
     fi
     ;;
 
-  X86*)
+  X86*|DARWIN)
     AC_CACHE_CHECK([assembler supports pc related relocs],
 	libffi_cv_as_x86_pcrel, [
 	libffi_cv_as_x86_pcrel=no

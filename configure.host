@@ -85,11 +85,7 @@ case "${host}" in
 
   i?86-*-darwin* | x86_64-*-darwin*)
 	TARGETDIR=x86
-	if test $ac_cv_sizeof_size_t = 4; then
-	  TARGET=X86_DARWIN
-	else
-	  TARGET=X86_64
-	fi
+        TARGET=DARWIN
 	;;
 
   i?86-*-* | x86_64-*-* | amd64-*)
@@ -242,12 +238,15 @@ case "${TARGET}" in
   POWERPC_FREEBSD)
 	SOURCES="ffi.c ffi_sysv.c sysv.S ppc_closure.S"
 	;;
-  X86 | X86_DARWIN | X86_FREEBSD | X86_WIN32)
+  X86 | X86_FREEBSD | X86_WIN32)
 	SOURCES="ffi.c sysv.S"
 	;;
   X86_64)
 	SOURCES="ffi64.c unix64.S"
 	;;
+  DARWIN)
+        SOURCES="ffi_darwin.c darwin.S"
+        ;;
   X86_WIN64)
 	SOURCES="ffiw64.c win64.S"
 	;;
